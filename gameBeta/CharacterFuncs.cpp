@@ -5,8 +5,7 @@
 using namespace std;
 
 //Crea un jugador
-void CreateCharacter(player &p, char name[], int x, int y) {
-	strcpy_s(p.name, name);
+void CreateCharacter(player &p, int x, int y) {
 	p.hp = 10;
 	p.at = 3;
 	p.x = x;

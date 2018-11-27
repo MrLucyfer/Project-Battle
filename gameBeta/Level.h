@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Characters.h"
 
 struct level {
@@ -9,8 +9,8 @@ struct level {
 
 struct mapType {
 	char pl = 64;
-	char u = 35;
-	char v = 32;
+	char u = 63;
+	char v = 35;
 };
 
 void EmptyArray(level a[2][3]);

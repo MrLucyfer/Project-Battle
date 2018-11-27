@@ -53,6 +53,10 @@ void Block(player &p, mob &m) {
 void Heal(player &p, int hp) {
 	if (p.potions > 0 && p.hp < 10) {
 		p.hp += hp;
+		p.potions -= 1;
+	}
+	else {
+		cout << "No potions left" << endl;
 	}
 }
 
@@ -70,6 +74,7 @@ int FightLoop(player &p) {
 	int order = Random(0, 1);
 	char option;
 	while (p.alive && m.alive) {
+		system("cls");
 		PrintInfo(p, m);
 		do {
 			 option = FightMenu();

@@ -111,7 +111,7 @@ void CurrentPosition(player p, level fl[2][3], mapType m) {
 			if (i == p.y && j == p.x) {
 				cout << m.pl << " " << " ";
 			}
-			else if (fl[i][j].type == 0) {
+			else if (fl[i][j].clean) {
 				cout << m.v << " " << " ";
 			}
 			else {
