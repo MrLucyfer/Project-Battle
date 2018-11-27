@@ -1,6 +1,8 @@
 #include <iostream>
 #include "Random.h"
+#include "Level.h"
 #include "Characters.h"
+
 
 using namespace std;
 
@@ -9,18 +11,21 @@ using namespace std;
 //3.Sacar la coord End y comprobar que no esta cogida
 //3.Determinar pocion o espada y comprobar que no esta cogida
 
-void EmptyArray(int a[2][3]) {
+void EmptyArray(level a[2][3]) {
 	for (int i = 0; i < 2; i++) {
 		for (int j = 0; j < 3; j++) {
-			a[i][j] = 1;
+			a[i][j].x = j;
+			a[i][j].y = i;
+			a[i][j].type = 1;
+			a[i][j].clean = false;
 		}
 	}
 }
 
-bool Check(int a[2][3], int &y, int &x) {
+bool Check(level a[2][3], int &y, int &x) {
 	y = Random(0, 1);
 	x = Random(0, 2);
-	if (a[y][x] == 1) {
+	if (a[y][x].type == 1) {
 		return true;
 	}
 	else {
@@ -28,18 +33,18 @@ bool Check(int a[2][3], int &y, int &x) {
 	}
 }
 
-void Insert(int a[2][3], int &y, int &x, int num) {
+void Insert(level a[2][3], int &y, int &x, int num) {
 	bool disponible;
 	do {
 		disponible = Check(a, y, x);
 	} while (!disponible);
 
-	a[y][x] = num;
+	a[y][x].type = num;
 }
 
 
 
-void CreateLevel(int fl[2][3]) {
+void CreateLevel(level fl[2][3]) {
 	int y, x;
 	EmptyArray(fl);
 	//Insertar start;
@@ -51,22 +56,21 @@ void CreateLevel(int fl[2][3]) {
 }
 
 
-		//Hacer minimapa
-void PrintLevel(int fl[2][3]) {
+void PrintLevel(level fl[2][3]) {
 	for (int i = 0; i < 2; i++) {
 		for (int j = 0; j < 3; j++) {
-			cout << fl[i][j] << " ";
+			cout << fl[i][j].type << " ";
 		}
 		cout << endl;
 	}
 }
 
-void GetZero(int fl[2][3], int &x, int &y) {
+void GetZero(level fl[2][3], int &x, int &y) {
 	int i = 0, j = 0;
 	bool found = false;
 
 	while (i < 2 && j < 3 && !found) {
-		if (fl[i][j] == 0) {
+		if (fl[i][j].type == 0) {
 			y = i;
 			x = j;
 			found = true;
@@ -83,10 +87,10 @@ void GetZero(int fl[2][3], int &x, int &y) {
 	}
 }
 
-
-int GetRoom(player p, int fl[2][3]) {
+int GetRoom(player p, level fl[2][3]) {
 	int room;
-	room = fl[p.y][p.x];
+	room = fl[p.y][p.x].type;
+
 	return room;
 }
 

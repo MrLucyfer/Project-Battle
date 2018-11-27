@@ -9,18 +9,33 @@ using namespace std;
 
 int main() {
 	srand((unsigned)time(NULL));
-	int level[2][3];
+	level level[2][3];
 	player p;
 	mapType m;
-	int iX, iY;
+	int iX, iY, room;
 	char name[10] = { "JEJE" };
-	int room;
 	int options[4];
 	char textOptions[4] = { 'u', 'd', 'l', 'r' };
 	CreateLevel(level);
 	GetZero(level, iX, iY);
 	CreateCharacter(p, name, iX, iY);
 	while (true) {
+		room = GetRoom(p, level);
+
+		switch (room) {
+		case 0:
+			cout << "Fountain" << endl;
+			break;
+		case 1:
+			cout << "Mob" << endl;
+			break;
+		case 2:
+			cout << "Bonus Item" << endl;
+			break;
+		case 3:
+			cout << "Exit" << endl;
+			break;
+		}
 		MovementLoop(p, level, options, textOptions, m);
 		system("cls");
 	}

@@ -1,4 +1,11 @@
 #pragma once
+#include "Characters.h"
+
+struct level {
+	int x, y, type;
+	bool clean;
+};
+
 
 struct mapType {
 	char pl = 64;
@@ -6,10 +13,10 @@ struct mapType {
 	char v = 32;
 };
 
-void EmptyArray(int a[2][3]);
-bool Check(int a[2][3], int &y, int &x);
-void Insert(int a[2][3], int &y, int &x, int num);
-void CreateLevel(int fl[2][3]);
-void PrintLevel(int fl[2][3]);
-void GetZero(int fl[2][3], int &, int &);
-int GetRoom(player p, int fl[2][3]);
+void EmptyArray(level a[2][3]);
+bool Check(level a[2][3], int &y, int &x);
+void Insert(level a[2][3], int &y, int &x, int num);
+void CreateLevel(level fl[2][3]);
+void PrintLevel(level fl[2][3]);
+void GetZero(level fl[2][3], int &, int &);
+int GetRoom(player p, level fl[2][3]);

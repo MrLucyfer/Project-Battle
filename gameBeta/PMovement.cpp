@@ -18,13 +18,20 @@ void Movement(player &p, int dir) {
 	case 4:
 			p.x += 1;		
 			break;
+	case 5:
+		cout << "Exit" << endl;
+		break;
+	case 6:
+		cout << "Stayed" << endl;
+		break;
 	default:
 		cout << "Wrong input" << endl;
+		break;
 	}
 }
 
 
-void CheckColliders(player p, int fl[2][3], int options[]) {
+void CheckColliders(player p, int options[]) {
 
 	//UP
 	if (p.y == 0) {
@@ -60,55 +67,68 @@ void CheckColliders(player p, int fl[2][3], int options[]) {
 	cout << endl;
 }
 
-int MovementMenu(player p, int fl[2][3], int options[], char tp[]) {
+int MovementMenu(player p, level fl[][3], int options[], char tp[]) {
 	int option;
 	int index = 0;
-	CheckColliders(p, fl, options);
-	cout << "Choose a direction: " << endl;
-	for (int i = 0; i < 4; i++) {
-		if (options[i] == 1) {
-			cout << index + 1 << "-" << tp[i] << endl;;
-		}
-		index++;
-	}
+	int room = GetRoom(p, fl);
 	
-	do {
-		cin >> option;
-		if (option <= 0 || option > 4 || options[option - 1] == 0) {
-			cout << "Enter a valid direction" << endl;
+	if (fl[p.y][p.x].type == 3) {
+		cout << "Do you want to exit or stay?" << endl;
+		cout << "1- Exit" << endl;
+		cout << "2 - Stay" << endl;
+		do {
+			cin >> option;
+			if (option != 1 || option != 2) {
+				cout << "Wrong input!" << endl;
+			}
+		} while (option != 1 || option != 2);
+		return option + 4;
+	}
+	else {
+		CheckColliders(p, options);
+		cout << "Choose a direction: " << endl;
+		for (int i = 0; i < 4; i++) {
+			if (options[i] == 1) {
+				cout << index + 1 << "-" << tp[i] << endl;;
+			}
+			index++;
 		}
-	} while (option <= 0 || option > 4 || options[option - 1] == 0);
-	return option;
+
+		do {
+			cin >> option;
+			if (option <= 0 || option > 4 || options[option - 1] == 0) {
+				cout << "Enter a valid direction" << endl;
+			}
+		} while (option <= 0 || option > 4 || options[option - 1] == 0);
+		return option;
+	}
 }
 
-
-void CurrentPosition(player p, int fl[2][3], mapType m) {
+//Mapa
+void CurrentPosition(player p, level fl[2][3], mapType m) {
 	for (int i = 0; i < 2; i++) {
 		for (int j = 0; j < 3; j++) {
 			if (i == p.y && j == p.x) {
-				cout << m.pl << " ";
+				cout << m.pl << " " << " ";
 			}
-			else if (fl[i][j] == 0) {
-				cout << m.v << " ";
+			else if (fl[i][j].type == 0) {
+				cout << m.v << " " << " ";
 			}
 			else {
-				cout << m.u << " ";
+				cout << m.u << " " << " ";
 			}
 		}
+		cout << endl;
 		cout << endl;
 	}
 }
 
-void ClearRoom(int fl[2][3], player p) {
-	fl[p.y][p.x] = 0;
-}
 
-
-void MovementLoop(player &p, int fl[2][3], int options[4], char tp[], mapType m) {
+void MovementLoop(player &p, level fl[2][3], int options[4], char tp[], mapType m) {
 	int dir;
 	CurrentPosition(p, fl, m);
-	CheckColliders(p, fl, options);
+	CheckColliders(p, options);
 	dir = MovementMenu(p, fl, options, tp);
 	Movement(p, dir);
-	ClearRoom(fl, p);
+	
 }
