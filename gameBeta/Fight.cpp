@@ -64,7 +64,9 @@ void PrintInfo(player p, mob m) {
 
 
 //Proceso de pelea hasta la muerte de uno de ellos
-int FightLoop(player &p, mob &m) {
+int FightLoop(player &p) {
+	mob m;
+	CreateMob(m);
 	int order = Random(0, 1);
 	char option;
 	while (p.alive && m.alive) {

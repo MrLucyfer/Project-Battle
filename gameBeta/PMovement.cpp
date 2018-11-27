@@ -132,3 +132,7 @@ void MovementLoop(player &p, level fl[2][3], int options[4], char tp[], mapType 
 	Movement(p, dir);
 	
 }
+
+void CleanRoom(player p, level fl[2][3]) {
+	fl[p.y][p.x].clean = true;
+}

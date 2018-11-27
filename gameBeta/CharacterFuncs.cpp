@@ -11,6 +11,7 @@ void CreateCharacter(player &p, char name[], int x, int y) {
 	p.at = 3;
 	p.x = x;
 	p.y = y;
+	p.potions = 1;
 }
 
 //Crea un mob

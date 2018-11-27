@@ -20,3 +20,4 @@ void CreateLevel(level fl[2][3]);
 void PrintLevel(level fl[2][3]);
 void GetZero(level fl[2][3], int &, int &);
 int GetRoom(player p, level fl[2][3]);
+void CleanRoom(player p, level fl[2][3]);

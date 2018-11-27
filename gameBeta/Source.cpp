@@ -36,6 +36,12 @@ int main() {
 			cout << "Exit" << endl;
 			break;
 		}
+
+		if (room == 1 && !level[p.y][p.x].clean) {
+			FightLoop(p);
+			system("cls");
+		}
+		CleanRoom(p, level);
 		MovementLoop(p, level, options, textOptions, m);
 		system("cls");
 	}
